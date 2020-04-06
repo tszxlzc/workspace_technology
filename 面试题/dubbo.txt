@@ -1,1 +1,12 @@
 1. dubbo如何优雅关闭服务
+https://dubbo.apache.org/zh-cn/blog/dubbo-gracefully-shutdown.html
+
+
+2.如何解决dubbo服务相互依赖
+https://my.oschina.net/u/2436679/blog/645588
+a) 关闭某个服务的启动时检查：(没有提供者时报错)
+    < dubbo:reference interface = "com.foo.BarService" check = "false" />
+b)关闭所有服务的启动时检查：(没有提供者时报错)
+    < dubbo:consumer check = "false" />
+c)关闭注册中心启动时检查：(注册订阅失败时报错)
+    < dubbo:registry check = "false" /> 

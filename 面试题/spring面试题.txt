@@ -1,1 +1,17 @@
 1. bean的生命周期
+
+2.Spring 懒加载
+懒加载：对象使用的时候才去创建。节省资源,但是不利于提前发现错误
+非懒加载：容器启动时立马创建。消耗资源,有利于提前发现错误
+多例是以懒加载的方式产生对象
+单例是以非懒加载的方式产生对象
+
+注：设置了lazy-init="true"属性的bean是懒加载的，但是如果这个bean被非懒加载的bean引用的话，那么非懒加载的bean在预实例化的注入的时候也会将配置了懒加载的bean进行实例化
+
+< beans  default-lazy-init ="true" >  可以将所有bean都配置为懒加载
+
+3.循环依赖解决
+构造方法造成的循环依赖是不能解决的；两个bean scope 为singleTone的 set注入能够解决循环依赖； scope 为prototype的set 注入的循环依赖也是不能解决的
+
+org.springframework.beans.factory.support.DefaultSingletonBeanRegistry#getSingleton  方法里单例三级缓存说明了这个问题
+https://blog.csdn.net/qq_36381855/article/details/79752689
